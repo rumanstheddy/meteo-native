@@ -1,11 +1,25 @@
 import { StyleSheet, Text, View } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TextInput } from "react-native";
 import GradientText from "@/components/GradientText";
+import { getLocationsFromSearch } from "@/apis/OpenMeteoAPI";
+import { useDebounce } from "@/hooks/useDebounce";
 
 export default function Index() {
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+  const debouncedSearch = useDebounce(search);
+
+  useEffect(() => {
+    const fetchResults = async () => {
+      getLocationsFromSearch(debouncedSearch).then((data) => {
+        console.log(data);
+      });
+    };
+
+    if (debouncedSearch) fetchResults();
+  }, [debouncedSearch]);
 
   return (
     <View

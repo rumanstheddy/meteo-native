@@ -12,19 +12,10 @@ export default function GradientText({
   text,
   gradientStyles,
 }: GradientTextProps) {
-  const [textWidth, setTextWidth] = useState(0);
-
   const { height: gradientHeight, width: gradientWidth } = gradientStyles;
 
   return (
-    <MaskedView
-      maskElement={<Text style={styles.text}>{text}</Text>}
-      onLayout={(event) => {
-        const { width } = event.nativeEvent.layout;
-        console.log(width);
-        setTextWidth(width);
-      }}
-    >
+    <MaskedView maskElement={<Text style={styles.text}>{text}</Text>}>
       <LinearGradient
         colors={[
           "#FFB300",
