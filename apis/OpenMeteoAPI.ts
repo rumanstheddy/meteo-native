@@ -7,7 +7,7 @@ const callAPI = async (url: string) => {
 
 const getLocationsFromSearch = async (
   searchQuery: string,
-  resultCount: number = 10
+  resultCount: number = 5
 ) => {
   const apiUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${searchQuery}&count=${resultCount}&language=en&format=json`;
   const data = await callAPI(apiUrl);

@@ -7,15 +7,40 @@ import { getLocationsFromSearch } from "@/apis/OpenMeteoAPI";
 import { useDebounce } from "@/hooks/useDebounce";
 
 export default function Index() {
+  type locationData = {
+    admin1: string;
+    admin1_id: number;
+    admin2: string;
+    admin2_id: number;
+    admin3: string;
+    admin3_id: number;
+    country: string;
+    country_code: string;
+    country_id: number;
+    elevation: number;
+    feature_code: string;
+    id: number;
+    latitude: number;
+    longitude: number;
+    name: string;
+    population: number;
+    postcodes: string[];
+    timezone: string;
+  };
+
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
+  const [results, setResults] = useState<locationData[]>([]);
   const debouncedSearch = useDebounce(search);
 
   useEffect(() => {
     const fetchResults = async () => {
-      getLocationsFromSearch(debouncedSearch).then((data) => {
-        console.log(data);
-      });
+      setLoading(true);
+      getLocationsFromSearch(debouncedSearch).then(
+        ({ results: locationDataResults }) => {
+          setResults(locationDataResults as locationData[]);
+        }
+      );
     };
 
     if (debouncedSearch) fetchResults();
@@ -45,6 +70,18 @@ export default function Index() {
         value={search}
         placeholder="Enter a location 📍"
       />
+      <View>
+        {results &&
+          results.map(
+            ({ latitude, longitude, name, admin1, country }: locationData) => {
+              return (
+                <Text key={`${latitude} + ${longitude}`}>
+                  {name}, {admin1}, {country}
+                </Text>
+              );
+            }
+          )}
+      </View>
     </View>
   );
 }
