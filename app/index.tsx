@@ -70,12 +70,15 @@ export default function Index() {
         value={search}
         placeholder="Enter a location 📍"
       />
-      <View>
+      <View style={styles.searchResultsContainer}>
         {results &&
           results.map(
             ({ latitude, longitude, name, admin1, country }: locationData) => {
               return (
-                <Text key={`${latitude} + ${longitude}`}>
+                <Text
+                  key={`${latitude} + ${longitude}`}
+                  style={styles.searchResult}
+                >
                   {name}, {admin1}, {country}
                 </Text>
               );
@@ -93,5 +96,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 5,
     paddingHorizontal: 20,
+  },
+  searchResultsContainer: {
+    borderWidth: 1,
+    borderColor: "#aaaaaa",
+    borderRadius: 10,
+  },
+  searchResult: {
+    padding: 10,
   },
 });
