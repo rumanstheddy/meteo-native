@@ -65,42 +65,47 @@ export default function Index() {
         gradientStyles={{ height: 40, width: 121 }}
       />
       <TextInput
-        style={styles.input}
+        style={styles.searchInput}
         onChangeText={(text) => setSearch(text)}
         value={search}
         placeholder="Enter a location 📍"
       />
-      <View style={styles.searchResultsContainer}>
-        {results &&
-          results.map(
+      {results && results.length > 0 && (
+        <View style={styles.searchResultsContainer}>
+          {results.map(
             ({ latitude, longitude, name, admin1, country }: locationData) => {
               return (
                 <Text
                   key={`${latitude} + ${longitude}`}
                   style={styles.searchResult}
+                  onPress={() => console.log(name, admin1)}
                 >
                   {name}, {admin1}, {country}
                 </Text>
               );
             }
           )}
-      </View>
+        </View>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  input: {
+  searchInput: {
     borderWidth: 1,
     borderColor: "#aaaaaa",
     borderRadius: 10,
     paddingVertical: 5,
     paddingHorizontal: 20,
+    backgroundColor: "white",
   },
   searchResultsContainer: {
     borderWidth: 1,
     borderColor: "#aaaaaa",
     borderRadius: 10,
+    padding: 5,
+    backgroundColor: "white",
   },
   searchResult: {
     padding: 10,
