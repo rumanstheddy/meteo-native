@@ -78,7 +78,7 @@ export default function Index() {
                 <Text
                   key={`${latitude} + ${longitude}`}
                   style={styles.searchResult}
-                  onPress={() => console.log(name, admin1)}
+                  onPress={() => console.log(name, admin1, latitude, longitude)}
                 >
                   {name}, {admin1}, {country}
                 </Text>
