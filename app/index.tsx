@@ -1,33 +1,14 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useEffect, useState } from "react";
 import { TextInput } from "react-native";
 import GradientText from "@/components/GradientText";
-import { getLocationsFromSearch } from "@/apis/OpenMeteoAPI";
+import { getLocationsFromSearch } from "@/apis/open-meteo";
 import { useDebounce } from "@/hooks/useDebounce";
+import { locationData } from "@/interfaces/locationData";
+import { SearchResults } from "@/components/SearchResults";
 
 export default function Index() {
-  type locationData = {
-    admin1: string;
-    admin1_id: number;
-    admin2: string;
-    admin2_id: number;
-    admin3: string;
-    admin3_id: number;
-    country: string;
-    country_code: string;
-    country_id: number;
-    elevation: number;
-    feature_code: string;
-    id: number;
-    latitude: number;
-    longitude: number;
-    name: string;
-    population: number;
-    postcodes: string[];
-    timezone: string;
-  };
-
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [results, setResults] = useState<locationData[]>([]);
@@ -71,21 +52,11 @@ export default function Index() {
         placeholder="Enter a location 📍"
       />
       {results && results.length > 0 && (
-        <View style={styles.searchResultsContainer}>
-          {results.map(
-            ({ latitude, longitude, name, admin1, country }: locationData) => {
-              return (
-                <Text
-                  key={`${latitude} + ${longitude}`}
-                  style={styles.searchResult}
-                  onPress={() => console.log(name, admin1, latitude, longitude)}
-                >
-                  {name}, {admin1}, {country}
-                </Text>
-              );
-            }
-          )}
-        </View>
+        <SearchResults
+          setSearch={setSearch}
+          setResults={setResults}
+          results={results}
+        />
       )}
     </View>
   );
