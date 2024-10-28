@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useEffect, useState } from "react";
 import { TextInput } from "react-native";
@@ -15,16 +15,17 @@ export default function Index() {
   const debouncedSearch = useDebounce(search);
 
   useEffect(() => {
-    const fetchResults = async () => {
+    const fetchLocations = async () => {
       setLoading(true);
       getLocationsFromSearch(debouncedSearch).then(
         ({ results: locationDataResults }) => {
           setResults(locationDataResults as locationData[]);
+          setLoading(false);
         }
       );
     };
 
-    if (debouncedSearch) fetchResults();
+    if (debouncedSearch) fetchLocations();
   }, [debouncedSearch]);
 
   return (
@@ -51,12 +52,17 @@ export default function Index() {
         value={search}
         placeholder="Enter a location 📍"
       />
-      {results && results.length > 0 && (
-        <SearchResults
-          setSearch={setSearch}
-          setResults={setResults}
-          results={results}
-        />
+      {loading ? (
+        <Text>Loading...</Text>
+      ) : (
+        results &&
+        results.length > 0 && (
+          <SearchResults
+            setSearch={setSearch}
+            setResults={setResults}
+            results={results}
+          />
+        )
       )}
     </View>
   );

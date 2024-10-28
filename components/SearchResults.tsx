@@ -17,7 +17,7 @@ export function SearchResults({
     longitude: number;
   }) => {
     router.navigate({
-      pathname: "forecast",
+      pathname: "/forecast",
       params: coordinates,
     });
     setResults([]);
