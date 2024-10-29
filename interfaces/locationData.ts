@@ -1,4 +1,4 @@
-export interface locationData {
+export interface LocationData {
   admin1: string;
   admin1_id: number;
   admin2: string;

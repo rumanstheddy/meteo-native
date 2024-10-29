@@ -1,8 +1,8 @@
-import { locationData } from "@/interfaces/locationData";
+import { LocationData } from "@/interfaces/LocationData";
 import { StyleSheet, Text } from "react-native";
 
 type ResultItemProps = {
-  data: locationData;
+  data: LocationData;
   handlePress: ({
     latitude,
     longitude,
@@ -12,7 +12,7 @@ type ResultItemProps = {
   }) => void;
 };
 
-export function ResultItem({ data, handlePress }: ResultItemProps) {
+export default function ResultItem({ data, handlePress }: ResultItemProps) {
   const { latitude, longitude, name, admin1, country } = data;
   return (
     <Text

@@ -1,13 +1,13 @@
 import { getForecastFromLocation } from "@/apis/open-meteo";
+import { ForecastData } from "@/interfaces/ForecastData";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function Forecast() {
   const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState([]);
-
   const { latitude, longitude } = useLocalSearchParams();
+  const [forecastData, setForecastData] = useState<ForecastData | null>(null);
 
   useEffect(() => {
     const fetchForecast = async () => {
@@ -16,17 +16,34 @@ export default function Forecast() {
         Number(latitude),
         Number(longitude)
       );
-      // TODO: Create an interface for the forecast data
-      setResults(data);
+      setForecastData(data as ForecastData);
       setLoading(false);
     };
 
-    if (latitude && longitude) fetchForecast();
-  }, [latitude, longitude]);
+    if (!forecastData) fetchForecast();
+  }, [forecastData]);
 
   return (
-    <View>
+    <View style={styles.forecastContainer}>
       <Text>Forecast Screen</Text>
+      {loading ? (
+        <Text>Loading...</Text>
+      ) : (
+        forecastData && (
+          <Text>
+            {forecastData.current.apparent_temperature}
+            {forecastData.current_units.apparent_temperature}
+          </Text>
+        )
+      )}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  forecastContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});

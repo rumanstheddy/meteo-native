@@ -5,13 +5,13 @@ import { TextInput } from "react-native";
 import GradientText from "@/components/GradientText";
 import { getLocationsFromSearch } from "@/apis/open-meteo";
 import { useDebounce } from "@/hooks/useDebounce";
-import { locationData } from "@/interfaces/locationData";
-import { SearchResults } from "@/components/SearchResults";
+import { LocationData } from "@/interfaces/LocationData";
+import SearchResults from "@/components/SearchResults";
 
 export default function Index() {
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
-  const [results, setResults] = useState<locationData[]>([]);
+  const [locationData, setLocationData] = useState<LocationData[]>([]);
   const debouncedSearch = useDebounce(search);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function Index() {
       setLoading(true);
       getLocationsFromSearch(debouncedSearch).then(
         ({ results: locationDataResults }) => {
-          setResults(locationDataResults as locationData[]);
+          setLocationData(locationDataResults as LocationData[]);
           setLoading(false);
         }
       );
@@ -55,12 +55,12 @@ export default function Index() {
       {loading ? (
         <Text>Loading...</Text>
       ) : (
-        results &&
-        results.length > 0 && (
+        locationData &&
+        locationData.length > 0 && (
           <SearchResults
             setSearch={setSearch}
-            setResults={setResults}
-            results={results}
+            setLocationData={setLocationData}
+            locationData={locationData}
           />
         )
       )}
@@ -76,15 +76,5 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 20,
     backgroundColor: "white",
-  },
-  searchResultsContainer: {
-    borderWidth: 1,
-    borderColor: "#aaaaaa",
-    borderRadius: 10,
-    padding: 5,
-    backgroundColor: "white",
-  },
-  searchResult: {
-    padding: 10,
   },
 });

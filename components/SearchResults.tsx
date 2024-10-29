@@ -1,15 +1,15 @@
-import { locationData } from "@/interfaces/locationData";
-import { StyleSheet, Text, View } from "react-native";
+import { LocationData } from "@/interfaces/LocationData";
+import { StyleSheet, View } from "react-native";
 import { router } from "expo-router";
-import { ResultItem } from "./ResultItem";
+import ResultItem from "./ResultItem";
 
-export function SearchResults({
-  results: searchResults,
-  setResults,
+export default function SearchResults({
+  locationData,
+  setLocationData,
   setSearch,
 }: {
-  results: locationData[];
-  setResults: (results: locationData[]) => void;
+  locationData: LocationData[];
+  setLocationData: (results: LocationData[]) => void;
   setSearch: (search: string) => void;
 }) {
   const handlePress = (coordinates: {
@@ -20,13 +20,13 @@ export function SearchResults({
       pathname: "/forecast",
       params: coordinates,
     });
-    setResults([]);
+    setLocationData([]);
     setSearch("");
   };
 
   return (
     <View style={styles.searchResultsContainer}>
-      {searchResults.map((item: locationData) => (
+      {locationData.map((item: LocationData) => (
         <ResultItem
           key={`${item.latitude} + ${item.longitude}`}
           data={item}
@@ -44,8 +44,5 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 5,
     backgroundColor: "white",
-  },
-  searchResult: {
-    padding: 10,
   },
 });
