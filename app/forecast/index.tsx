@@ -1,5 +1,5 @@
 import { getForecastFromLocation } from "@/apis/open-meteo";
-import { ForecastData } from "@/interfaces/ForecastData";
+import { CurrentWeather, ForecastData, WeatherUnits } from "@/interfaces/ForecastData";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -29,12 +29,13 @@ export default function Forecast() {
       {loading ? (
         <Text>Loading...</Text>
       ) : (
-        forecastData && (
+        forecastData &&
+        Object.keys(forecastData.current).map((key) => (
           <Text>
-            {forecastData.current.apparent_temperature}
-            {forecastData.current_units.apparent_temperature}
+            {key} {forecastData.current[key as keyof CurrentWeather]}{" "}
+            {forecastData.current_units[key as keyof WeatherUnits]}
           </Text>
-        )
+        ))
       )}
     </View>
   );
