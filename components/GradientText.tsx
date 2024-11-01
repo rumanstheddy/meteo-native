@@ -1,21 +1,20 @@
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
-import { useState } from "react";
 import { StyleSheet, Text } from "react-native";
 
 type GradientTextProps = {
   text: string;
-  gradientStyles: { height: number; width: number };
+  fontSize: number;
 };
 
-export default function GradientText({
-  text,
-  gradientStyles,
-}: GradientTextProps) {
-  const { height: gradientHeight, width: gradientWidth } = gradientStyles;
+export default function GradientText({ text, fontSize }: GradientTextProps) {
+  const gradientHeight = fontSize * 1.5;
+  const gradientWidth = fontSize * 5.6;
 
   return (
-    <MaskedView maskElement={<Text style={styles.text}>{text}</Text>}>
+    <MaskedView
+      maskElement={<Text style={[styles.text, { fontSize }]}>{text}</Text>}
+    >
       <LinearGradient
         colors={[
           "#FFB300",
@@ -35,9 +34,12 @@ export default function GradientText({
   );
 }
 
+// 121 - 21, 40
+// 172 - 30, 45
+// 200 - 35, 50
+
 const styles = StyleSheet.create({
   text: {
-    fontSize: 21,
     fontWeight: "bold",
     color: "black",
   },

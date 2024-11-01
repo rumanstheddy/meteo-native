@@ -27,5 +27,6 @@ export default function ResultItem({ data, handlePress }: ResultItemProps) {
 const styles = StyleSheet.create({
   searchResult: {
     padding: 10,
+    textAlign: "center",
   },
 });
