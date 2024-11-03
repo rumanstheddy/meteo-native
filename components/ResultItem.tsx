@@ -6,9 +6,15 @@ type ResultItemProps = {
   handlePress: ({
     latitude,
     longitude,
+    name,
+    admin1,
+    country,
   }: {
     latitude: number;
     longitude: number;
+    name: string;
+    admin1: string;
+    country: string;
   }) => void;
 };
 
@@ -17,7 +23,15 @@ export default function ResultItem({ data, handlePress }: ResultItemProps) {
   return (
     <Text
       style={styles.searchResult}
-      onPress={() => handlePress({ latitude, longitude })}
+      onPress={() =>
+        handlePress({
+          latitude,
+          longitude,
+          name,
+          admin1,
+          country,
+        })
+      }
     >
       {name}, {admin1}, {country}
     </Text>

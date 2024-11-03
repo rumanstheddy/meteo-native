@@ -34,10 +34,6 @@ export default function GradientText({ text, fontSize }: GradientTextProps) {
   );
 }
 
-// 121 - 21, 40
-// 172 - 30, 45
-// 200 - 35, 50
-
 const styles = StyleSheet.create({
   text: {
     fontWeight: "bold",

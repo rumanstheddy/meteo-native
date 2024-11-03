@@ -10,7 +10,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 export default function Forecast() {
   const [loading, setLoading] = useState(false);
-  const { latitude, longitude } = useLocalSearchParams();
+  const { latitude, longitude, name, admin1, country } = useLocalSearchParams();
   const [forecastData, setForecastData] = useState<ForecastData | null>(null);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function Forecast() {
 
   return (
     <View style={styles.forecastContainer}>
-      <Text>Forecast Screen</Text>
+      <Text>{name + ", " + admin1 + ", " + country}</Text>
       {loading ? (
         <Text>Loading...</Text>
       ) : (
