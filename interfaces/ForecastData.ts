@@ -30,7 +30,7 @@ export interface WeatherUnits {
 
 export interface ForecastData {
   current: CurrentWeather;
-  current_units: CurrentWeather;
+  current_units: WeatherUnits;
   elevation: number;
   generationtime_ms: number;
   latitude: number;

@@ -1,4 +1,5 @@
 import { getForecastFromLocation } from "@/apis/OpenMeteoService";
+import ForecastResults from "@/components/ForecastResults";
 import { ForecastData } from "@/interfaces/ForecastData";
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
@@ -23,62 +24,6 @@ export default function Forecast() {
     if (!forecastData) fetchForecast();
   }, [forecastData]);
 
-  function displayForecastDetails() {
-    const data = forecastData?.current;
-    const units = forecastData?.current_units;
-
-    const currentTime = new Date(String(data?.time));
-
-    return (
-      <>
-        <View style={styles.forecastDataRow}>
-          <Text>
-            {currentTime.toLocaleString("en-US", { timeZone: "GMT" })} (GMT)
-          </Text>
-        </View>
-        <View style={styles.forecastDataRow}>
-          <View style={styles.forecastDataCell}>
-            <Text>Temperature</Text>
-            <Text style={styles.forecastDetailText}>
-              {data?.temperature_2m}
-              {units?.temperature_2m}
-            </Text>
-          </View>
-          <View style={styles.forecastDataCell}>
-            <Text>Apparent Temperature</Text>
-            <Text style={styles.forecastDetailText}>
-              {data?.apparent_temperature}
-              {units?.apparent_temperature}
-            </Text>
-          </View>
-        </View>
-        <View style={styles.forecastDataRow}>
-          <View style={styles.forecastDataCell}>
-            <Text>Humidity</Text>
-            <Text style={styles.forecastDetailText}>
-              {data?.relative_humidity_2m}
-              {units?.relative_humidity_2m}
-            </Text>
-          </View>
-          <View style={styles.forecastDataCell}>
-            <Text>Precipitation</Text>
-            <Text style={styles.forecastDetailText}>
-              {data?.precipitation + " " + units?.precipitation}
-            </Text>
-          </View>
-        </View>
-        <View style={styles.forecastDataRow}>
-          <View style={styles.forecastDataCell}>
-            <Text>Wind Speed</Text>
-            <Text style={styles.forecastDetailText}>
-              {data?.wind_speed_10m + " " + units?.wind_speed_10m}
-            </Text>
-          </View>
-        </View>
-      </>
-    );
-  }
-
   return (
     <View style={styles.forecastContainer}>
       <View style={styles.locationDetails}>
@@ -89,7 +34,12 @@ export default function Forecast() {
         {loading ? (
           <Text>Loading...</Text>
         ) : (
-          forecastData && displayForecastDetails()
+          forecastData && (
+            <ForecastResults
+              weatherData={forecastData?.current}
+              weatherUnits={forecastData?.current_units}
+            />
+          )
         )}
       </View>
     </View>
@@ -112,18 +62,5 @@ const styles = StyleSheet.create({
   forecastDetails: {
     alignItems: "center",
     gap: 16,
-  },
-  forecastDataRow: {
-    flexDirection: "row",
-    gap: 16,
-  },
-  forecastDataCell: {
-    flexDirection: "column",
-    gap: 4,
-    alignItems: "center",
-  },
-  forecastDetailText: {
-    fontSize: 16,
-    fontWeight: "bold",
   },
 });

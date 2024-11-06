@@ -18,7 +18,10 @@ type ResultItemProps = {
   }) => void;
 };
 
-export default function ResultItem({ data, handlePress }: ResultItemProps) {
+export default function SearchResultItem({
+  data,
+  handlePress,
+}: ResultItemProps) {
   const { latitude, longitude, name, admin1, country } = data;
   return (
     <Text

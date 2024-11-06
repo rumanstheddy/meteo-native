@@ -1,7 +1,7 @@
 import { LocationData } from "@/interfaces/LocationData";
 import { StyleSheet, View } from "react-native";
 import { router } from "expo-router";
-import ResultItem from "./ResultItem";
+import SearchResultItem from "./SearchResultItem";
 
 export default function SearchResults({
   locationData,
@@ -27,7 +27,7 @@ export default function SearchResults({
   return (
     <View style={styles.searchResultsContainer}>
       {locationData.map((item: LocationData) => (
-        <ResultItem
+        <SearchResultItem
           key={`${item.latitude} + ${item.longitude}`}
           data={item}
           handlePress={handlePress}
@@ -44,6 +44,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 5,
     backgroundColor: "white",
-    width: "80%"
+    width: "80%",
   },
 });
