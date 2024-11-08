@@ -25,32 +25,42 @@ export default function Forecast() {
   }, [forecastData]);
 
   return (
-    <View style={styles.forecastContainer}>
-      <View style={styles.locationDetails}>
-        <Text style={styles.locationName}>{name}</Text>
-        <Text>{admin1 + ", " + country}</Text>
-      </View>
-      <View style={styles.forecastDetails}>
-        {loading ? (
-          <Text>Loading...</Text>
-        ) : (
-          forecastData && (
-            <ForecastResults
-              weatherData={forecastData?.current}
-              weatherUnits={forecastData?.current_units}
-            />
-          )
-        )}
+    <View style={styles.wrapper}>
+      <View style={styles.forecastContainer}>
+        <View style={styles.locationDetails}>
+          <Text style={styles.locationName}>{name}</Text>
+          <Text>{admin1 + ", " + country}</Text>
+        </View>
+        <View style={styles.forecastDetails}>
+          {loading ? (
+            <Text>Loading...</Text>
+          ) : (
+            forecastData && (
+              <ForecastResults
+                weatherData={forecastData?.current}
+                weatherUnits={forecastData?.current_units}
+              />
+            )
+          )}
+        </View>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  forecastContainer: {
+  wrapper: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#0008",
+  },
+  forecastContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#eee",
+    padding: 16,
+    borderRadius: 12,
   },
   locationDetails: {
     alignItems: "center",
