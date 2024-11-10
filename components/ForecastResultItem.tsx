@@ -4,13 +4,17 @@ export default function ForecastResultItem({
   title,
   data,
   units,
+  children,
 }: {
   title: string;
   data: number;
   units: string;
+  // icon: string;
+  children: JSX.Element;
 }) {
   return (
     <View style={styles.forecastDataCell}>
+      {children}
       <Text>{title}</Text>
       <Text style={styles.forecastDetailText}>{`${data} ${units}`}</Text>
     </View>

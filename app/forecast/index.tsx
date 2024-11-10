@@ -31,7 +31,7 @@ export default function Forecast() {
           <Text style={styles.locationName}>{name}</Text>
           <Text>{admin1 + ", " + country}</Text>
         </View>
-        <View style={styles.forecastDetails}>
+        <View>
           {loading ? (
             <Text>Loading...</Text>
           ) : (
@@ -53,13 +53,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#0008",
+    backgroundColor: "#0009",
   },
   forecastContainer: {
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#eee",
-    padding: 16,
+    backgroundColor: "#fff",
+    padding: 20,
     borderRadius: 12,
   },
   locationDetails: {
@@ -68,9 +68,5 @@ const styles = StyleSheet.create({
   },
   locationName: {
     fontSize: 18,
-  },
-  forecastDetails: {
-    alignItems: "center",
-    gap: 16,
   },
 });
