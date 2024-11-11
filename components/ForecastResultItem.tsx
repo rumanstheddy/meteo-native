@@ -9,7 +9,6 @@ export default function ForecastResultItem({
   title: string;
   data: number;
   units: string;
-  // icon: string;
   children: JSX.Element;
 }) {
   return (
