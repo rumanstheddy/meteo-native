@@ -2,6 +2,7 @@ import { CurrentWeather, WeatherUnits } from "@/interfaces/ForecastData";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import ForecastResultItem from "./ForecastResultItem";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { FontAwesome } from "@expo/vector-icons";
 
 export default function ForecastResults({
   weatherData,
@@ -11,8 +12,6 @@ export default function ForecastResults({
   weatherUnits: WeatherUnits;
 }) {
   const currentTime = new Date(String(weatherData?.time));
-
-  // TODO: Use List View or Section List (read about them) for rendering lists
 
   const forecastItems = [
     {
@@ -57,20 +56,36 @@ export default function ForecastResults({
     groupItems.push(forecastItems.slice(i, i + 2));
   }
 
-  console.log(groupItems);
+  const timeIcon = weatherData?.is_day ? "sun-o" : "moon-o";
+  const iconColor = weatherData?.is_day ? "#FFB300" : "#5500CC";
 
   return (
     <View style={styles.forecastDetails}>
-      <View style={styles.forecastDataRow}>
+      <View
+        style={[
+          styles.localTime,
+          {
+            marginBottom: 24,
+          },
+        ]}
+      >
+        <FontAwesome name={timeIcon} size={28} color={iconColor} />
         <Text>
-          {currentTime.toLocaleString("en-US", { timeZone: "GMT" })} (GMT)
+          {currentTime.toLocaleString("en-US", { timeZone: "GMT" })} GMT
         </Text>
       </View>
       <FlatList
         keyExtractor={(_, index) => `row-${index}`}
         data={groupItems}
-        renderItem={({ item }) => (
-          <View style={styles.forecastDataRow}>
+        renderItem={({ item, index }) => (
+          <View
+            style={[
+              styles.forecastDataRow,
+              index < groupItems.length - 1 && {
+                marginBottom: 24,
+              },
+            ]}
+          >
             {item.map(({ key, title, data, units, icon }) => (
               <ForecastResultItem
                 key={key}
@@ -78,7 +93,7 @@ export default function ForecastResults({
                 data={data}
                 units={units}
               >
-                <MaterialCommunityIcons name={icon} size={24} color="black" />
+                <MaterialCommunityIcons name={icon} size={28} color="black" />
               </ForecastResultItem>
             ))}
           </View>
@@ -89,16 +104,22 @@ export default function ForecastResults({
 }
 
 const styles = StyleSheet.create({
+  forecastDetails: {
+    alignItems: "center",
+    flex: 1,
+  },
+
   forecastDataRow: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    gap: 16,
-    marginBottom: 24,
+    gap: 24,
   },
 
-  forecastDetails: {
+  localTime: {
+    flexDirection: "column",
+    justifyContent: "center",
     alignItems: "center",
-    flex: 1,
+    gap: 4,
   },
 });

@@ -33,13 +33,8 @@ export default function Forecast() {
 
   return (
     <View style={styles.wrapper}>
-      <View style={styles.forecastContainer}>
+      <View style={styles.forecastPageContainer}>
         <View style={styles.locationDetails}>
-          <View style={styles.tempUnitSwitchContainer}>
-            <Text>&deg;C</Text>
-            <Switch onValueChange={toggleTemperature} value={isFahrenheit} />
-            <Text>&deg;F</Text>
-          </View>
           <Text style={styles.locationName}>{name}</Text>
           <Text>{admin1 + ", " + country}</Text>
         </View>
@@ -53,6 +48,11 @@ export default function Forecast() {
             />
           )
         )}
+        <View style={styles.switchContainer}>
+          <Text>&deg;C</Text>
+          <Switch onValueChange={toggleTemperature} value={isFahrenheit} />
+          <Text>&deg;F</Text>
+        </View>
       </View>
     </View>
   );
@@ -65,14 +65,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#0009",
   },
-  forecastContainer: {
+  forecastPageContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
     padding: 24,
     borderRadius: 12,
-    maxHeight: "65%",
+    maxHeight: "70%",
+    width: "80%",
     gap: 16,
   },
   locationDetails: {
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
   locationName: {
     fontSize: 18,
   },
-  tempUnitSwitchContainer: {
+  switchContainer: {
     flexDirection: "row",
     alignItems: "center",
     gap: 8,

@@ -14,8 +14,8 @@ export default function ForecastResultItem({
   return (
     <View style={styles.forecastDataCell}>
       {children}
-      <Text>{title}</Text>
-      <Text style={styles.forecastDetailText}>{`${data} ${units}`}</Text>
+      <Text style={styles.weatherTitle}>{title}</Text>
+      <Text style={styles.weatherValue}>{`${data} ${units}`}</Text>
     </View>
   );
 }
@@ -26,8 +26,11 @@ const styles = StyleSheet.create({
     gap: 4,
     alignItems: "center",
   },
-  forecastDetailText: {
-    fontSize: 16,
+  weatherTitle: {
+    fontSize: 12,
+  },
+  weatherValue: {
+    fontSize: 18,
     fontWeight: "bold",
   },
 });
