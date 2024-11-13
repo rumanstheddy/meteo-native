@@ -31,50 +31,64 @@ export default function Index() {
   }, [debouncedSearch]);
 
   return (
-    <View style={styles.homeContainer}>
-      <MaterialCommunityIcons
-        style={styles.brandIcon}
-        name="weather-sunset"
-        size={50}
-        color="black"
-      />
-      <GradientText text="Meteoscope" fontSize={50} />
-      <View style={styles.searchInputContainer}>
-        <TextInput
-          style={styles.searchInput}
-          onChangeText={(text) => setSearch(text)}
-          value={search}
-          placeholder="Enter a location 📍"
+    <View style={styles.wrapper}>
+      <View style={styles.homeContainer}>
+        <MaterialCommunityIcons
+          style={styles.brandIcon}
+          name="weather-sunset"
+          size={50}
+          color="black"
         />
-      </View>
-      {loading ? (
-        <Text>Loading...</Text>
-      ) : (
-        locationData &&
-        locationData.length > 0 && (
-          <SearchResults
-            setSearch={setSearch}
-            setLocationData={setLocationData}
-            locationData={locationData}
+        <GradientText text="Meteoscope" fontSize={50} />
+        <View style={styles.searchInputContainer}>
+          <TextInput
+            style={styles.searchInput}
+            onChangeText={(text) => setSearch(text)}
+            value={search}
+            placeholder="Enter a location 📍"
           />
-        )
-      )}
+        </View>
+        {loading ? (
+          <Text>Loading...</Text>
+        ) : (
+          locationData &&
+          locationData.length > 0 && (
+            <SearchResults
+              setSearch={setSearch}
+              setLocationData={setLocationData}
+              locationData={locationData}
+            />
+          )
+        )}
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#EB8317",
+  },
+
   homeContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "#FFF",
+    padding: 24,
+    borderRadius: 12,
+    maxHeight: "50%",
+    width: "80%",
   },
 
   brandIcon: { color: "#FFB300", marginBottom: -8 },
 
   searchInputContainer: {
     // padding: 5,
-    width: "80%",
+    width: "100%",
     marginTop: 4,
   },
 
