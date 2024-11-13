@@ -33,7 +33,7 @@ export default function Index() {
   return (
     <View style={styles.homeContainer}>
       <MaterialCommunityIcons
-        style={{ color: "#FFB300" }}
+        style={styles.brandIcon}
         name="weather-sunset"
         size={50}
         color="black"
@@ -70,9 +70,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 
+  brandIcon: { color: "#FFB300", marginBottom: -8 },
+
   searchInputContainer: {
     // padding: 5,
     width: "80%",
+    marginTop: 4,
   },
 
   searchInput: {
