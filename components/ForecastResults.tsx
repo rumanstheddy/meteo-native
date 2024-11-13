@@ -57,7 +57,7 @@ export default function ForecastResults({
   }
 
   const timeIcon = weatherData?.is_day ? "sun-o" : "moon-o";
-  const iconColor = weatherData?.is_day ? "#FFB300" : "#5500CC";
+  const iconColor = weatherData?.is_day ? "#E7C30E" : "#7314E0";
 
   return (
     <View style={styles.forecastDetails}>
