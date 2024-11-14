@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useEffect, useState } from "react";
 import { TextInput } from "react-native";
@@ -31,7 +31,7 @@ export default function Index() {
   }, [debouncedSearch]);
 
   return (
-    <View style={styles.wrapper}>
+    <KeyboardAvoidingView style={styles.wrapper}>
       <View style={styles.homeContainer}>
         <MaterialCommunityIcons
           style={styles.brandIcon}
@@ -61,7 +61,7 @@ export default function Index() {
           )
         )}
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
@@ -70,17 +70,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#EB8317",
+    backgroundColor: "#3FA2F6",
   },
 
   homeContainer: {
-    flex: 1,
+    // flexGrow: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#FFF",
-    padding: 24,
+    padding: 36,
     borderRadius: 12,
-    maxHeight: "50%",
+    maxHeight: "95%",
     width: "80%",
   },
 

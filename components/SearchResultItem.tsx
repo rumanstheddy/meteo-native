@@ -45,5 +45,6 @@ const styles = StyleSheet.create({
   searchResult: {
     padding: 10,
     textAlign: "center",
+    // color: "#F3C623",
   },
 });

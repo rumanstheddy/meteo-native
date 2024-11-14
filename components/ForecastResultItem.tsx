@@ -5,17 +5,21 @@ export default function ForecastResultItem({
   data,
   units,
   children,
+  isDay,
 }: {
   title: string;
   data: number;
   units: string;
   children: JSX.Element;
+  isDay: boolean;
 }) {
   return (
     <View style={styles.forecastDataCell}>
       {children}
       <Text style={styles.weatherTitle}>{title}</Text>
-      <Text style={styles.weatherValue}>{`${data} ${units}`}</Text>
+      <Text
+        style={[styles.weatherValue]}
+      >{`${data} ${units}`}</Text>
     </View>
   );
 }

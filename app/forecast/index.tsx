@@ -12,6 +12,15 @@ export default function Forecast() {
   const { latitude, longitude, name, admin1, country } = useLocalSearchParams();
   const [forecastData, setForecastData] = useState<ForecastData | null>(null);
 
+  const COLOR_BLUE = "#3FA2F6";
+  const COLOR_DARK_BLUE = "#20303f";
+  const COLOR_YELLOW = "#FFB300";
+  const COLOR_PURPLE = "#8129CC";
+  const COLOR_DARK_YELLOW = "#684900";
+  const COLOR_DARK_PURPLE = "#370067";
+
+  const switchTrackColor = forecastData?.current.is_day ? COLOR_DARK_YELLOW : COLOR_DARK_PURPLE
+
   useEffect(() => {
     const fetchForecast = async () => {
       setLoading(true);
@@ -27,12 +36,21 @@ export default function Forecast() {
     fetchForecast();
   }, [isFahrenheit]);
 
-  function toggleTemperature() {
+  function toggleTempUnits() {
     setIsFahrenheit((prev) => !prev);
   }
 
   return (
-    <View style={styles.wrapper}>
+    <View
+      style={[
+        styles.wrapper,
+        {
+          backgroundColor: forecastData?.current.is_day
+            ? COLOR_BLUE
+            : COLOR_DARK_BLUE,
+        },
+      ]}
+    >
       <View style={styles.forecastPageContainer}>
         <View style={styles.locationDetails}>
           <Text style={styles.locationName}>{name}</Text>
@@ -50,7 +68,17 @@ export default function Forecast() {
         )}
         <View style={styles.switchContainer}>
           <Text>&deg;C</Text>
-          <Switch onValueChange={toggleTemperature} value={isFahrenheit} />
+          <Switch
+            onValueChange={toggleTempUnits}
+            value={isFahrenheit}
+            thumbColor={
+              forecastData?.current.is_day ? COLOR_YELLOW : COLOR_PURPLE
+            }
+            trackColor={{
+              false: switchTrackColor,
+              true: switchTrackColor,
+            }}
+          />
           <Text>&deg;F</Text>
         </View>
       </View>
@@ -63,8 +91,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#0009",
   },
+
   forecastPageContainer: {
     flex: 1,
     justifyContent: "center",
@@ -72,18 +100,21 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 24,
     borderRadius: 12,
-    maxHeight: "70%",
+    maxHeight: "80%",
     width: "80%",
     gap: 16,
   },
+
   locationDetails: {
     alignItems: "center",
     marginBottom: 8,
     gap: 12,
   },
+
   locationName: {
     fontSize: 18,
   },
+
   switchContainer: {
     flexDirection: "row",
     alignItems: "center",

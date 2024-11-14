@@ -57,7 +57,8 @@ export default function ForecastResults({
   }
 
   const timeIcon = weatherData?.is_day ? "sun-o" : "moon-o";
-  const iconColor = weatherData?.is_day ? "#E7C30E" : "#7314E0";
+  const iconColor = weatherData?.is_day ? "#FFB300" : "#8129CC";
+  // const weatherIconColor = "#FFB300";
 
   return (
     <View style={styles.forecastDetails}>
@@ -92,8 +93,13 @@ export default function ForecastResults({
                 title={title}
                 data={data}
                 units={units}
+                isDay={Boolean(weatherData?.is_day)}
               >
-                <MaterialCommunityIcons name={icon} size={28} color="black" />
+                <MaterialCommunityIcons
+                  name={icon}
+                  size={28}
+                  color={iconColor}
+                />
               </ForecastResultItem>
             ))}
           </View>
@@ -111,7 +117,7 @@ const styles = StyleSheet.create({
 
   forecastDataRow: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-around",
     alignItems: "center",
     gap: 24,
   },
