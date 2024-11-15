@@ -12,12 +12,12 @@ export default function Forecast() {
   const { latitude, longitude, name, admin1, country } = useLocalSearchParams();
   const [forecastData, setForecastData] = useState<ForecastData | null>(null);
 
-  const COLOR_BLUE = "#3FA2F6";
-  const COLOR_DARK_BLUE = "#20303f";
+  const COLOR_BLUE = "#40A2F6";
   const COLOR_YELLOW = "#FFB300";
-  const COLOR_PURPLE = "#8129CC";
+  const COLOR_PURPLE = "#8900FF";
+  const COLOR_DARK_BLUE = "#0D2233";
   const COLOR_DARK_YELLOW = "#684900";
-  const COLOR_DARK_PURPLE = "#370067";
+  const COLOR_DARK_PURPLE = "#380069";
 
   const switchTrackColor = forecastData?.current.is_day ? COLOR_DARK_YELLOW : COLOR_DARK_PURPLE
 

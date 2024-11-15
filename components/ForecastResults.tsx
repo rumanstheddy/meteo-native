@@ -23,10 +23,18 @@ export default function ForecastResults({
     },
     {
       key: "apparentTemperature",
-      title: "Temperature (Feels like)",
+      title: "Feels like",
       data: weatherData?.apparent_temperature,
       units: weatherUnits?.apparent_temperature,
       icon: "sun-thermometer-outline" as const,
+    },
+
+    {
+      key: "precipitation",
+      title: "Precipitation",
+      data: weatherData?.precipitation,
+      units: weatherUnits?.precipitation,
+      icon: "weather-rainy" as const,
     },
     {
       key: "humidity",
@@ -34,13 +42,6 @@ export default function ForecastResults({
       data: weatherData?.relative_humidity_2m,
       units: weatherUnits?.relative_humidity_2m,
       icon: "water-outline" as const,
-    },
-    {
-      key: "precipitation",
-      title: "Precipitation",
-      data: weatherData?.precipitation,
-      units: weatherUnits?.precipitation,
-      icon: "weather-rainy" as const,
     },
     {
       key: "windSpeed",
@@ -70,7 +71,7 @@ export default function ForecastResults({
           },
         ]}
       >
-        <FontAwesome name={timeIcon} size={28} color={iconColor} />
+        <FontAwesome name={timeIcon} size={30} color={iconColor} />
         <Text>
           {currentTime.toLocaleString("en-US", { timeZone: "GMT" })} GMT
         </Text>
@@ -97,7 +98,7 @@ export default function ForecastResults({
               >
                 <MaterialCommunityIcons
                   name={icon}
-                  size={28}
+                  size={30}
                   color={iconColor}
                 />
               </ForecastResultItem>
@@ -116,10 +117,11 @@ const styles = StyleSheet.create({
   },
 
   forecastDataRow: {
+    width: "100%",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "center",
     alignItems: "center",
-    gap: 24,
+    gap: 72,
   },
 
   localTime: {

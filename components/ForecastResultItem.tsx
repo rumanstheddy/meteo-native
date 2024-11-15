@@ -13,12 +13,18 @@ export default function ForecastResultItem({
   children: JSX.Element;
   isDay: boolean;
 }) {
+  const COLOR_YELLOW = "#FFB300";
+  const COLOR_PURPLE = "#8900FF";
+
   return (
     <View style={styles.forecastDataCell}>
       {children}
       <Text style={styles.weatherTitle}>{title}</Text>
       <Text
-        style={[styles.weatherValue]}
+        style={[
+          styles.weatherValue,
+          // { color: isDay ? COLOR_YELLOW : COLOR_PURPLE },
+        ]}
       >{`${data} ${units}`}</Text>
     </View>
   );
@@ -34,7 +40,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   weatherValue: {
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 20,
+    fontWeight: "500",
   },
 });

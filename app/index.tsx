@@ -1,4 +1,10 @@
-import { KeyboardAvoidingView, StyleSheet, Text, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Linking,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useEffect, useState } from "react";
 import { TextInput } from "react-native";
@@ -13,6 +19,9 @@ export default function Index() {
   const [loading, setLoading] = useState(false);
   const [locationData, setLocationData] = useState<LocationData[]>([]);
   const debouncedSearch = useDebounce(search);
+
+  const COLOR_BLUE = "#40A2F6";
+  const fontColor = "#676767";
 
   useEffect(() => {
     const fetchLocations = async () => {
@@ -31,7 +40,9 @@ export default function Index() {
   }, [debouncedSearch]);
 
   return (
-    <KeyboardAvoidingView style={styles.wrapper}>
+    <KeyboardAvoidingView
+      style={[styles.wrapper, { backgroundColor: COLOR_BLUE }]}
+    >
       <View style={styles.homeContainer}>
         <MaterialCommunityIcons
           style={styles.brandIcon}
@@ -39,7 +50,24 @@ export default function Index() {
           size={50}
           color="black"
         />
-        <GradientText text="Meteoscope" fontSize={50} />
+        <GradientText text="Meteoscope" fontSize={40} />
+        <Text
+          style={{
+            textAlign: "center",
+            color: fontColor,
+            paddingBottom: 8,
+            lineHeight: 20,
+          }}
+        >
+          Meteoscope brings pinpoint weather forecasts worldwide, powered by
+          <Text
+            style={{ color: COLOR_BLUE, textDecorationLine: "underline" }}
+            onPress={() => Linking.openURL("https://open-meteo.com/")}
+          >
+            {" "}
+            Open Meteo
+          </Text>
+        </Text>
         <View style={styles.searchInputContainer}>
           <TextInput
             style={styles.searchInput}
@@ -48,6 +76,7 @@ export default function Index() {
             placeholder="Enter a location 📍"
           />
         </View>
+        //TODO: Add spinner instead of loading text
         {loading ? (
           <Text>Loading...</Text>
         ) : (
@@ -70,7 +99,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#3FA2F6",
   },
 
   homeContainer: {

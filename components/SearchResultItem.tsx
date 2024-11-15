@@ -24,6 +24,7 @@ export default function SearchResultItem({
 }: ResultItemProps) {
   const { latitude, longitude, name, admin1, country } = data;
   return (
+    //TODO: Add a button like visual press feedback on press
     <Text
       style={styles.searchResult}
       onPress={() =>
