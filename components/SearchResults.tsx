@@ -15,6 +15,9 @@ export default function SearchResults({
   const handlePress = (coordinates: {
     latitude: number;
     longitude: number;
+    name: string;
+    admin1: string;
+    country: string;
   }) => {
     router.navigate({
       pathname: "/forecast",
