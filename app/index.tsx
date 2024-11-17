@@ -21,6 +21,7 @@ export default function Index() {
   const debouncedSearch = useDebounce(search);
 
   const COLOR_BLUE = "#40A2F6";
+  const COLOR_YELLOW = "#FFB300";
   const fontColor = "#676767";
 
   useEffect(() => {
@@ -48,9 +49,12 @@ export default function Index() {
           style={styles.brandIcon}
           name="weather-sunset"
           size={50}
-          color="black"
+          color={COLOR_YELLOW}
         />
-        <GradientText text="Meteoscope" fontSize={40} />
+        {/* <GradientText text="Meteoscope" fontSize={40} /> */}
+        <Text style={{ color: COLOR_YELLOW, fontSize: 40, fontWeight: "bold" }}>
+          Meteoscope
+        </Text>
         <Text
           style={{
             textAlign: "center",
@@ -112,7 +116,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
 
-  brandIcon: { color: "#FFB300", marginBottom: -8 },
+  brandIcon: { marginBottom: -8 },
 
   searchInputContainer: {
     // padding: 5,

@@ -1,5 +1,5 @@
 import { LocationData } from "@/interfaces/LocationData";
-import { StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 
 type ResultItemProps = {
   data: LocationData;
@@ -25,8 +25,7 @@ export default function SearchResultItem({
   const { latitude, longitude, name, admin1, country } = data;
   return (
     //TODO: Add a button like visual press feedback on press
-    <Text
-      style={styles.searchResult}
+    <Pressable
       onPress={() =>
         handlePress({
           latitude,
@@ -37,8 +36,10 @@ export default function SearchResultItem({
         })
       }
     >
-      {name}, {admin1}, {country}
-    </Text>
+      <Text style={styles.searchResult}>
+        {name}, {admin1}, {country}
+      </Text>
+    </Pressable>
   );
 }
 

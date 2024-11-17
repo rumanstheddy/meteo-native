@@ -13,8 +13,8 @@ export default function ForecastResultItem({
   children: JSX.Element;
   isDay: boolean;
 }) {
-  const COLOR_YELLOW = "#FFB300";
-  const COLOR_PURPLE = "#8900FF";
+  // const COLOR_YELLOW = "#FFB300";
+  // const COLOR_PURPLE = "#8900FF";
 
   return (
     <View style={styles.forecastDataCell}>
